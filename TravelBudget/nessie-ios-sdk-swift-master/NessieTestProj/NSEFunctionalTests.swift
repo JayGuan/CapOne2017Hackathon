@@ -28,6 +28,7 @@ class AccountTests {
                 if let array = response as Array<Account>? {
                     if array.count > 0 {
                         let account = array[0] as Account?
+                        print("inside array.count")
                         self.testGetAccount(accountId: account!.accountId)
                         print(array)
                     } else {
@@ -58,10 +59,11 @@ class AccountTests {
             } else {
                 if let array = response as Array<Account>? {
                     print(array)
+                    print("testGestCustomerAccounts")
                     let account = array[0] as Account?
                     self.testPostAccount(customerId: account!.customerId)
                     self.testPutAccount(accountId: account!.accountId, nickname: "New nickname", accountNumber: "0987654321123456")
-                    self.testDeleteAccount(accountId: account!.accountId)
+                    //self.testDeleteAccount(accountId: account!.accountId)
                 }
             }
         })
@@ -69,7 +71,7 @@ class AccountTests {
     
     func testPostAccount(customerId: String) {
         let accountType = AccountType.Savings
-        let accountToCreate = Account(accountId: "", accountType:accountType, nickname: "Hola", rewards: 10, balance: 100, accountNumber: "1234567890123456", customerId: customerId)
+        let accountToCreate = Account(accountId: "57d32a5ce63c5995587e85ec", accountType:accountType, nickname: "Hola", rewards: 10, balance: 100, accountNumber: "1234567890123456", customerId: customerId)
         AccountRequest().postAccount(accountToCreate, completion:{(response, error) in
             if (error != nil) {
                 print(error!)
@@ -78,6 +80,8 @@ class AccountTests {
                 let message = accountResponse?.message
                 let accountCreated = accountResponse?.object
                 print("\(message): \(accountCreated)")
+                print("accountCreated: \(accountToCreate.accountNumber)")
+                print("accountID: \(accountToCreate.accountId)")
             }
         })
     }
@@ -471,13 +475,6 @@ class DepositsTests {
 
 class PurchasesTests {
     let client = NSEClient.sharedInstance
-    
-    init() {
-        client.setKey("bca7093ce9c023bb642d0734b29f1ad2")
-        
-        testGetAllPurchasesFromAccount()
-    }
-    
     var account: Account = Account(accountId: "57d32a5ce63c5995587e85ec",
                                    accountType:.CreditCard,
                                    nickname: "Hola",
@@ -489,11 +486,19 @@ class PurchasesTests {
                                       name: "Best Productions",
                                       category: ["Production"],
                                       address: Address(streetName: "Lafayette St.",
-                                        streetNumber: "5901",
-                                        city: "Brooklyn",
-                                        state: "NY",
-                                        zipCode: "07009"),
+                                                       streetNumber: "5901",
+                                                       city: "Brooklyn",
+                                                       state: "NY",
+                                                       zipCode: "07009"),
                                       geocode: Geocode(lng: -1, lat: 33))
+    init() {
+        client.setKey("bca7093ce9c023bb642d0734b29f1ad2")
+        testGetAllPurchasesFromAccount()
+    }
+    
+    func getPurchaseLocation() {
+        
+    }
     
     func testGetPurchase(PurchaseId: String) {
         PurchaseRequest().getPurchase(PurchaseId, completion:{(response, error) in
@@ -528,6 +533,8 @@ class PurchasesTests {
     func testGetAllPurchasesFromAccount() {
         PurchaseRequest().getPurchasesFromAccountId(account.accountId, completion:{(response, error) in
             if (error != nil) {
+                print("ERROR")
+                print("account with error: \(self.account.accountId)")
                 print(error!)
             } else {
                 if let array = response as Array<Purchase>? {
@@ -535,6 +542,7 @@ class PurchasesTests {
                         let purchase = array[0]
                         print(array)
                         self.testGetPurchase(PurchaseId: purchase.purchaseId)
+                        print("Test1")
                     } else {
                         print("No purchases found")
                     }

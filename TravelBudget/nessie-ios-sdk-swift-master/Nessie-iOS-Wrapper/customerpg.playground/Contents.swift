@@ -1,11 +1,3 @@
-//
-//  Customer.swift
-//  Nessie-iOS-Wrapper
-//
-//  Created by Lopez Vargas, Victor R. on 10/5/15.
-//  Copyright (c) 2015 Nessie. All rights reserved.
-//
-
 import Foundation
 import SwiftyJSON
 
@@ -47,12 +39,12 @@ open class CustomerRequest {
         if let customerId = customerId {
             requestString += "\(customerId)"
         }
-
+        
         requestString += "?key=\(NSEClient.sharedInstance.getKey())"
         
         return requestString
     }
-
+    
     // APIs
     open func getCustomers(_ completion:@escaping (_ customersArrays: Array<Customer>?, _ error: NSError?) -> Void) {
         requestType = HTTPType.GET
@@ -118,7 +110,7 @@ open class CustomerRequest {
                        "city": newCustomer.address.city,
                        "state": newCustomer.address.state,
                        "zip": newCustomer.address.zipCode]
-
+        
         let params: Dictionary<String, AnyObject> = ["first_name": newCustomer.firstName as AnyObject,
                                                      "last_name": newCustomer.lastName as AnyObject,
                                                      "address": address as AnyObject]
@@ -175,28 +167,5 @@ open class CustomerRequest {
             }
         })
     }
-    
-    open func testGetCustomers() {
-        // Retrieve all the Customers!
-        CustomerRequest().getCustomers({(response, error) in
-            if (error != nil) {
-                // optionally handle the error here
-                print(error)
-            } else {
-                // we are expecting back an array of customers. Type check!
-                if let array = response as Array<Customer>? {
-                    // if there are Customers in the result, print the first Customer
-                    if array.count > 0 {
-                        let customer = array[0] as Customer?
-                        //self.testGetCustomer(customer!.customerId)
-                        print(array)
-                    } else {
-                        print("No accounts found")
-                    }
-                }
-            }
-        })
-    }
-
-
+}
 }

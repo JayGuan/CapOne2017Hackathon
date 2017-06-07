@@ -10,14 +10,14 @@ import Foundation
 import SwiftyJSON
 
 open class Geocode {
-    open let lng: NSNumber
-    open let lat: NSNumber
-    
+    let lng: NSNumber
+    let lat: NSNumber
+
     internal init(data: JSON) {
         lng = data["lng"].number ?? 0
         lat = data["lat"].number ?? 0
     }
-    
+
     public init(lng: NSNumber, lat: NSNumber) {
         self.lng = lng
         self.lat = lat

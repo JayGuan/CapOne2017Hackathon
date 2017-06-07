@@ -123,12 +123,11 @@ open class PurchaseRequest {
     open func getPurchasesFromAccountId(_ accountId: String, completion: @escaping (_ purchaseArrays: Array<Purchase>?, _ error: NSError?) -> Void) {
         requestType = HTTPType.GET
         self.accountId = accountId
-        print("getPurchasesFromAccountId: \(accountId)")
+        
         let nseClient = NSEClient.sharedInstance
         let request = nseClient.makeRequest(buildRequestUrl(), requestType: requestType)
         nseClient.loadDataFromURL(request, completion: {(data, error) -> Void in
             if (error != nil) {
-                print("getPurchasesFromAccountId Error")
                 completion(nil, error)
             } else {
                 let json = JSON(data: data!)

@@ -21,6 +21,10 @@
 		682E36D91EE87E68003C2B9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 682E36D71EE87E68003C2B9A /* Main.storyboard */; };
 		682E36DB1EE87E68003C2B9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 682E36DA1EE87E68003C2B9A /* Assets.xcassets */; };
 		682E36DE1EE87E68003C2B9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 682E36DC1EE87E68003C2B9A /* LaunchScreen.storyboard */; };
+		682E36E31EE883E0003C2B9A /* Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF9F35D1B98A90E000D2D4D /* Purchase.swift */; };
+		682E36E41EE883E1003C2B9A /* Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF9F35D1B98A90E000D2D4D /* Purchase.swift */; };
+		682E36E51EE883E2003C2B9A /* Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF9F35D1B98A90E000D2D4D /* Purchase.swift */; };
+		682E36E61EE883E2003C2B9A /* Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF9F35D1B98A90E000D2D4D /* Purchase.swift */; };
 		6CC56EBF75D8E1BD508B2BC0 /* Pods_NessieTestProjTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44A1DB88D89CE0CE951B7CC9 /* Pods_NessieTestProjTests.framework */; };
 		8BC550C0F0A0D034FE92B95F /* Pods_Nessie_iOS_Wrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F13BF5E16F790B0DBAD332 /* Pods_Nessie_iOS_Wrapper.framework */; };
 		B81D5BC31B0A87470086B2C6 /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81D5BC21B0A87470086B2C6 /* Customer.swift */; };
@@ -726,6 +730,7 @@
 			files = (
 				682E36D61EE87E68003C2B9A /* ViewController.swift in Sources */,
 				682E36D41EE87E68003C2B9A /* AppDelegate.swift in Sources */,
+				682E36E61EE883E2003C2B9A /* Purchase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -735,6 +740,7 @@
 			files = (
 				5BF0FEA01D8C675700223ED4 /* TabViewController.swift in Sources */,
 				B834EB151AE5BB5000379E11 /* ViewController.swift in Sources */,
+				682E36E41EE883E1003C2B9A /* Purchase.swift in Sources */,
 				B834EB131AE5BB5000379E11 /* AppDelegate.swift in Sources */,
 				5BF0FEA21D8C676900223ED4 /* SecondViewController.swift in Sources */,
 				B86E4A7F1B0BD6EF0076A6D0 /* NSEFunctionalTests.swift in Sources */,
@@ -745,6 +751,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				682E36E51EE883E2003C2B9A /* Purchase.swift in Sources */,
 				B834EB291AE5BB5000379E11 /* NessieTestProjTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -773,6 +780,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				682E36E31EE883E0003C2B9A /* Purchase.swift in Sources */,
 				B8C54A041ACEE595002206AC /* Nessie_iOS_WrapperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
