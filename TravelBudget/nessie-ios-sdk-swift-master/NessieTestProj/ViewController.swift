@@ -10,11 +10,14 @@ import UIKit
 import NessieFmwk
 import MapKit
 import CoreLocation
+import UserNotifications
 
 class ViewController: UIViewController,CLLocationManagerDelegate {
     var customer1:Customer? = nil
     var purchase1:Purchase? = nil
     var currentLocation: (Double, Double)? = nil
+    
+    let nearbyNotification = Notification.Name(rawValue:"nearbyNotification")
     
     
     let manager = CLLocationManager()
@@ -28,8 +31,53 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         manager.requestAlwaysAuthorization()
         manager.startUpdatingLocation()
        self.title = "Wallet"
+        /*
+        let nc = NotificationCenter.default
+        nc.addObserver(forName:nearbyNotification, object:nil, queue:nil, using:catchNotification(notification:))
+ */
         
+    }
+    
+    @available(iOS 10.0, *)
+    func notification() {
+        let content = UNMutableNotificationContent()
+        content.title = NSString.localizedUserNotificationString(forKey: "Charging Inquiry!", arguments: nil)
+        content.body = NSString.localizedUserNotificationString(forKey: "Action Required!", arguments: nil)
+        content.sound = UNNotificationSound.default()
         
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        
+        // create the request object
+        let request = UNNotificationRequest(identifier: "5 seconds", content: content, trigger: trigger)
+        // ebale or disable features based on authorization
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound], completionHandler: {didAllow, error in})
+        center.add(request, withCompletionHandler: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let nc = NotificationCenter.default
+        nc.post(name:nearbyNotification,
+                object: nil,
+                userInfo:["message":"Hello there!", "date":Date()])
+    }
+    
+    func catchNotification(notification:Notification) -> Void {
+        print("Catch notification")
+        
+        guard let userInfo = notification.userInfo,
+            let message  = userInfo["message"] as? String,
+            let date     = userInfo["date"]    as? Date else {
+                print("No userInfo found in notification")
+                return
+        }
+        
+        let alert = UIAlertController(title: "Notification!",
+                                      message:"\(message) received at \(date)",
+            preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func unwindToVC1(segue:UIStoryboardSegue) { }
@@ -144,8 +192,11 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         return false
     }
     
+    @available(iOS 10.0, *)
     @IBAction func nearbyTransClicked(_ sender: UIButton) {
        testDataNear()
+        notification()
+
     }
 
     
