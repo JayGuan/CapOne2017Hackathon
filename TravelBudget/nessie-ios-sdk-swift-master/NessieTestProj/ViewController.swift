@@ -14,6 +14,8 @@ import CoreLocation
 class ViewController: UIViewController,CLLocationManagerDelegate {
     var customer1:Customer? = nil
     var purchase1:Purchase? = nil
+    var currentLocation: (Double, Double)? = nil
+    
     
     let manager = CLLocationManager()
     
@@ -23,9 +25,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         
         manager.desiredAccuracy = kCLLocationAccuracyBest
         
-        manager.requestWhenInUseAuthorization()
+        manager.requestAlwaysAuthorization()
         manager.startUpdatingLocation()
-        testData()
+       
         
         
     }
@@ -41,13 +43,13 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                 
         print("Latitude: \(myLocation.latitude)")
         print("Longitude: \(myLocation.longitude)")
-        
-        
+        currentLocation = (myLocation.latitude, myLocation.longitude)
+        print("current location assigned \(currentLocation)")
                 
     }
 
     //Called on view open
-    func testData() {
+    func testDataNear() {
         //Personal contact information
         var address1 = Address.init(streetName: "Capital One Dr", streetNumber: "15054", city: "Richmond", state: "VA", zipCode: "23229")
         customer1 = Customer.init(firstName: "Kyle", lastName: "Guan", address: address1, customerId: "1")
@@ -71,34 +73,82 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
 
                                           geocode: Geocode(lng: -77.437291, lat: 37.542430))
         
-        let merchantFar: Merchant = Merchant(merchantId: "57cf75cea73e494d8675ec49",
-                                          name: "Ko",
-                                          category: ["Contemporary American"],
-                                          address: Address(streetName: "Extra Place",
-                                                           streetNumber: "8",
-                                                           city: "New York",
-                                                           state: "NY",
-                                                           zipCode: "10003"),
-                                          geocode: Geocode(lng: -73.991654, lat: 40.724860))
-        
         var latitudeNear = merchantNear.geocode.lat
         var longitudeNear = merchantNear.geocode.lng
         print("lat Near : \(latitudeNear)")
         print("longitude Near: \(longitudeNear)")
         
+        print("START HERE")
+        print(verified(location: (latitudeNear,longitudeNear)))
+    }
+    
+    //Called on view open
+    func testDataFar() {
+        //Personal contact information
+        var address1 = Address.init(streetName: "Capital One Dr", streetNumber: "15054", city: "Richmond", state: "VA", zipCode: "23229")
+        customer1 = Customer.init(firstName: "Kyle", lastName: "Guan", address: address1, customerId: "1")
+        
+        let client = NSEClient.sharedInstance
+        var account: Account = Account(accountId: "57d32a5ce63c5995587e85ec",
+                                       accountType:.CreditCard,
+                                       nickname: "Hola",
+                                       rewards: 10,
+                                       balance: 100,
+                                       accountNumber: "1234567890123456",
+                                       customerId: "57d0c20d1fd43e204dd48282")
+
+        let merchantFar: Merchant = Merchant(merchantId: "57cf75cea73e494d8675ec49",
+                                             name: "Ko",
+                                             category: ["Contemporary American"],
+                                             address: Address(streetName: "Extra Place",
+                                                              streetNumber: "8",
+                                                              city: "New York",
+                                                              state: "NY",
+                                                              zipCode: "10003"),
+                                             geocode: Geocode(lng: -73.991654, lat: 40.724860))
         var latitudeFar = merchantFar.geocode.lat
         var longitudeFar = merchantFar.geocode.lng
         print("lat Far: \(latitudeFar)")
         print("longitude Far: \(longitudeFar)")
+        
+        print("START HERE")
+        print(verified(location: (latitudeFar,longitudeFar)))
+    }
+    
+    func verified (location: (NSNumber, NSNumber)) -> Bool {
+        var lat = Double(location.0)
+        var long = Double(location.1)
+        print("verified")
+        print(";lat: \(lat)")
+        print("long \(long)")
+        print("current location in verified: (currentLocation)")
+        if let currentLocation = self.currentLocation {
+            print("enter if let")
+            if (currentLocation.0 - lat > 1 || currentLocation.0 - lat < -1) {
+                return false
+            }
+            else if (currentLocation.1 - long > 1 || currentLocation.1 - long < -1) {
+                return false
+            }
+            else {
+            return true
+            }
+        }
+        else {
+            return false
+            print("current location not available")
+        }
+        return false
     }
     
     @IBAction func nearbyTransClicked(_ sender: UIButton) {
-       
+       testDataNear()
     }
 
     
     @IBAction func suspiciousButtonClicked(_ sender: UIButton) {
-        let _ = PurchasesTests()
+        //let _ = PurchasesTests()
+        testDataFar()
     }
     
 }
