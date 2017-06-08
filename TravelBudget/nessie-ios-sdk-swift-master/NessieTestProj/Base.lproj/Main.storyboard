@@ -39,7 +39,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2qg-4b-wWq">
-                                        <rect key="frame" x="80" y="195" width="215" height="35"/>
+                                        <rect key="frame" x="80" y="242" width="215" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.71095556020736694" green="0.092372991144657135" blue="0.11025253683328629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -52,25 +52,13 @@
                                             <segue destination="dqj-9l-Dtn" kind="show" identifier="distant" id="Qr3-1A-f2S"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="capital-one-tech" translatesAutoresizingMaskIntoConstraints="NO" id="AHa-GZ-Zoe">
-                                        <rect key="frame" x="40" y="294" width="295" height="208"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="unlock" translatesAutoresizingMaskIntoConstraints="NO" id="uKL-lB-7hr">
+                                        <rect key="frame" x="0.0" y="-73" width="375" height="677"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Team 0xFF Demo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aX6-gR-heL">
-                                        <rect key="frame" x="0.0" y="-18" width="375" height="44"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.93766276041666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="aX6-gR-heL" secondAttribute="trailing" id="9dU-wb-NdO"/>
-                                    <constraint firstItem="aX6-gR-heL" firstAttribute="leading" secondItem="nn1-di-Kwj" secondAttribute="leading" id="ClG-m7-cbJ"/>
-                                    <constraint firstItem="aX6-gR-heL" firstAttribute="top" secondItem="nn1-di-Kwj" secondAttribute="top" constant="22" id="UPc-Nq-LhF"/>
-                                    <constraint firstItem="aX6-gR-heL" firstAttribute="centerX" secondItem="nn1-di-Kwj" secondAttribute="centerX" id="oSW-Tj-8sa"/>
-                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -368,6 +356,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="capital-one-tech" width="663" height="801"/>
+        <image name="unlock" width="750" height="1334"/>
     </resources>
 </document>
