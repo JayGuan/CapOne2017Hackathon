@@ -32,7 +32,7 @@ class ChargeInquiry: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.title = "Charge Inquiry"
         
         super.viewDidLoad()
@@ -111,7 +111,7 @@ class ChargeInquiry: UIViewController {
         mapView.setRegion(coordinateRegion, animated: true)
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -120,7 +120,7 @@ class ChargeInquiry: UIViewController {
     @IBAction func crossButtonClicked(_ sender: UIButton) {
         lockCard()
     }
-
+    
     func lockCard() {
         let alert = UIAlertController(title: "Lock Card", message: "Do you want to lock the card?", preferredStyle: .alert)
         
@@ -166,7 +166,7 @@ class ChargeInquiry: UIViewController {
     }
     
     func OkHandler() {
-     performSegue(withIdentifier: "unwindSegue", sender: self)
+        performSegue(withIdentifier: "unwindSegue", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -179,15 +179,15 @@ class ChargeInquiry: UIViewController {
             }
         }
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

@@ -214,7 +214,7 @@
 			path = "Capital-One-255";
 			sourceTree = "<group>";
 		};
-		B834EB0F1AE5BB5000379E11 /* NessieTestProj */ = {
+		B834EB0F1AE5BB5000379E11 /* Wallet+ */ = {
 			isa = PBXGroup;
 			children = (
 				B834EB121AE5BB5000379E11 /* AppDelegate.swift */,
@@ -229,6 +229,7 @@
 				B32A48841EE8CFA000E1D1CD /* ChargeInquiry.swift */,
 				B32A48861EE8D31300E1D1CD /* NormalTransactions.swift */,
 			);
+			name = "Wallet+";
 			path = NessieTestProj;
 			sourceTree = "<group>";
 		};
@@ -262,7 +263,7 @@
 			children = (
 				B8C549F31ACEE595002206AC /* Nessie-iOS-Wrapper */,
 				B8C54A001ACEE595002206AC /* Nessie-iOS-WrapperTests */,
-				B834EB0F1AE5BB5000379E11 /* NessieTestProj */,
+				B834EB0F1AE5BB5000379E11 /* Wallet+ */,
 				B834EB251AE5BB5000379E11 /* NessieTestProjTests */,
 				682E36D21EE87E68003C2B9A /* Capital-One-255 */,
 				B8C549F21ACEE595002206AC /* Products */,

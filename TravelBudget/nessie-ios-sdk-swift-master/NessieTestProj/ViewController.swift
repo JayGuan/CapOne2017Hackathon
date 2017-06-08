@@ -20,7 +20,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     @IBOutlet weak var background: UIImageView!
     let nearbyNotification = Notification.Name(rawValue:"nearbyNotification")
-    
+    let farNotification = Notification.Name(rawValue:"farNotification")
     
     let manager = CLLocationManager()
     
@@ -32,11 +32,11 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         
         manager.requestAlwaysAuthorization()
         manager.startUpdatingLocation()
-       self.title = "Wallet"
+        self.title = "Wallet"
         /*
-        let nc = NotificationCenter.default
-        nc.addObserver(forName:nearbyNotification, object:nil, queue:nil, using:catchNotification(notification:))
- */
+         let nc = NotificationCenter.default
+         nc.addObserver(forName:nearbyNotification, object:nil, queue:nil, using:catchNotification(notification:))
+         */
         
     }
     
@@ -110,14 +110,14 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         let span:MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
         let myLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
         let region:MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
-                
+        
         print("Latitude: \(myLocation.latitude)")
         print("Longitude: \(myLocation.longitude)")
         currentLocation = (myLocation.latitude, myLocation.longitude)
         print("current location assigned \(currentLocation)")
-                
+        
     }
-
+    
     //Called on view open
     func testDataNear() {
         //Personal contact information
@@ -133,16 +133,16 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                                        accountNumber: "1234567890123456",
                                        customerId: "57d0c20d1fd43e204dd48282")
         let merchantNear: Merchant = Merchant(merchantId: "1000",
-                                          name: "La Grotta Ristorante",
-                                          category: ["Restaurant"],
-                                          address: Address(streetName: "East Broad Street",
-                                                           streetNumber: "529",
-                                                           city: "Richmond",
-                                                           state: "VA",
-                                                           zipCode: "23219"),
-
-                                          geocode: Geocode(lng: -77.437291, lat: 37.542430))
-
+                                              name: "La Grotta Ristorante",
+                                              category: ["Restaurant"],
+                                              address: Address(streetName: "East Broad Street",
+                                                               streetNumber: "529",
+                                                               city: "Richmond",
+                                                               state: "VA",
+                                                               zipCode: "23219"),
+                                              
+                                              geocode: Geocode(lng: -77.437291, lat: 37.542430))
+        
         
         var latitudeNear = merchantNear.geocode.lat
         var longitudeNear = merchantNear.geocode.lng
@@ -167,7 +167,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                                        balance: 100,
                                        accountNumber: "1234567890123456",
                                        customerId: "57d0c20d1fd43e204dd48282")
-
+        
         let merchantFar: Merchant = Merchant(merchantId: "57cf75cea73e494d8675ec49",
                                              name: "Ko",
                                              category: ["Contemporary American"],
@@ -204,7 +204,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                 return false
             }
             else {
-            return true
+                return true
             }
         }
         else {
@@ -231,13 +231,15 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             
             present(alert, animated: true, completion: nil)
         }
-
+        
     }
-
     
+    
+    @available(iOS 10.0, *)
     @IBAction func suspiciousButtonClicked(_ sender: UIButton) {
         //let _ = PurchasesTests()
         if cardOn {
+            notification()
             performSegue(withIdentifier: "distant", sender: self)
             testDataFar()
         }
@@ -250,7 +252,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
             alert.addAction(myAction)
             
             present(alert, animated: true, completion: nil)
-
+            
         }
     }
     
@@ -271,10 +273,10 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         else if segue.identifier == "nearby" {
             if let dvc = segue.destination as? NormalTransactions {
                 // use variables from purchase1 if created, instead of hard coded value
-                dvc.amount = 175.5
+                dvc.amount = 364.81
                 dvc.city = "Richmond"
                 dvc.date = Date.init()
-                dvc.type = "Food"
+                dvc.type = "Auto"
             }
         }
     }
