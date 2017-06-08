@@ -23,6 +23,7 @@ class NormalTransactions: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Approved"
         displayData()
         // Do any additional setup after loading the view.
     }

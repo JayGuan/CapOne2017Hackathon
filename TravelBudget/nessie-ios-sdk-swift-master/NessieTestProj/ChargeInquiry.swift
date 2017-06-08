@@ -19,10 +19,10 @@ class ChargeInquiry: UIViewController {
     
     
     
-    var userLat = 37.543499
-    var userLong = -77.436787
-    var purchaseLat = 37.443499
-    var purchaseLong = -77.436787
+    var userLat = 0.0
+    var userLong = 0.0
+    var purchaseLat = 40.724860
+    var purchaseLong = -73.991654
     var location: (Double,Double)? = nil
     var city = ""
     var date:Date? = nil
@@ -33,8 +33,7 @@ class ChargeInquiry: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        
+        self.title = "Charge Inquiry"
         
         super.viewDidLoad()
         displayData()
@@ -44,19 +43,6 @@ class ChargeInquiry: UIViewController {
         
         
         
-        let userannotation = MKPointAnnotation()
-        
-        let userCoordinate = CLLocationCoordinate2D(latitude: userLat, longitude: userLong)
-        
-        userannotation.coordinate = userCoordinate
-        
-        userannotation.title = "Your Location"
-        
-        
-        
-        
-        
-        mapView.addAnnotation(userannotation)
         
         
         
@@ -80,6 +66,20 @@ class ChargeInquiry: UIViewController {
         
         mapView.addAnnotation(purchaseannotation)
         
+        let userannotation = MKPointAnnotation()
+        
+        let userCoordinate = CLLocationCoordinate2D(latitude: userLat, longitude: userLong)
+        
+        userannotation.coordinate = userCoordinate
+        
+        userannotation.title = "Your Location"
+        
+        
+        
+        
+        
+        mapView.addAnnotation(userannotation)
+        
         
         
         
@@ -87,6 +87,7 @@ class ChargeInquiry: UIViewController {
         //centerMapOnLocation(location:initialLocation)
         
         self.mapView.showAnnotations(self.mapView.annotations, animated: true)
+        mapView.selectAnnotation(mapView.annotations[1], animated: true)
     }
     
     func displayData() {

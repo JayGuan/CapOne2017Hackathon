@@ -27,7 +27,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         
         manager.requestAlwaysAuthorization()
         manager.startUpdatingLocation()
-       
+       self.title = "Wallet"
         
         
     }
@@ -164,6 +164,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                 dvc.city = "NY"
                 dvc.date = Date.init()
                 dvc.type = "Grocery"
+                dvc.userLat = (currentLocation?.0)!
+                dvc.userLong = (currentLocation?.1)!
             }
         }
         else if segue.identifier == "nearby" {
