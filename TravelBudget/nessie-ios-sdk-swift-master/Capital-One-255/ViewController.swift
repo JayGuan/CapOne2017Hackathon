@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     
     
 
+        @IBOutlet weak var background: UIImageView!
     }
 
     override func didReceiveMemoryWarning() {

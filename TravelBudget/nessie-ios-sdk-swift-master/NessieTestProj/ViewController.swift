@@ -16,7 +16,9 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     var customer1:Customer? = nil
     var purchase1:Purchase? = nil
     var currentLocation: (Double, Double)? = nil
+    var cardOn = true
     
+    @IBOutlet weak var background: UIImageView!
     let nearbyNotification = Notification.Name(rawValue:"nearbyNotification")
     
     
@@ -36,6 +38,26 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         nc.addObserver(forName:nearbyNotification, object:nil, queue:nil, using:catchNotification(notification:))
  */
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        manager.delegate = self
+        
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        manager.requestAlwaysAuthorization()
+        manager.startUpdatingLocation()
+        self.title = "Wallet"
+        if cardOn == false {
+            background.image = UIImage(named: "lock")
+            let alert = UIAlertController(title: "Action Required", message: "Please contact 1-800-CAPITAL (1-800-227-4825)", preferredStyle: .alert)
+            
+            let myAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            
+            alert.addAction(myAction)
+            
+            present(alert, animated: true, completion: nil)
+        }
     }
     
     @available(iOS 10.0, *)
@@ -194,15 +216,42 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     
     @available(iOS 10.0, *)
     @IBAction func nearbyTransClicked(_ sender: UIButton) {
-       testDataNear()
-        notification()
+        if cardOn {
+            performSegue(withIdentifier: "nearby", sender: self)
+            testDataNear()
+            notification()
+        }
+        else {
+            print("todo alert transaction")
+            let alert = UIAlertController(title: "Transaction Cancelled", message: "Your card is locked", preferredStyle: .alert)
+            
+            let myAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            
+            alert.addAction(myAction)
+            
+            present(alert, animated: true, completion: nil)
+        }
 
     }
 
     
     @IBAction func suspiciousButtonClicked(_ sender: UIButton) {
         //let _ = PurchasesTests()
-        testDataFar()
+        if cardOn {
+            performSegue(withIdentifier: "distant", sender: self)
+            testDataFar()
+        }
+        else {
+            print("todo")
+            let alert = UIAlertController(title: "Transaction Cancelled", message: "Your card is locked", preferredStyle: .alert)
+            
+            let myAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            
+            alert.addAction(myAction)
+            
+            present(alert, animated: true, completion: nil)
+
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

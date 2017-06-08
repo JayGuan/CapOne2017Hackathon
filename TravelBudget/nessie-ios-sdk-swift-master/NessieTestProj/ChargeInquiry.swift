@@ -28,7 +28,7 @@ class ChargeInquiry: UIViewController {
     var date:Date? = nil
     var type = ""
     var amount = 0.0
-    
+    var cardOn = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,9 +118,38 @@ class ChargeInquiry: UIViewController {
     }
     
     @IBAction func crossButtonClicked(_ sender: UIButton) {
-
+        lockCard()
     }
 
+    func lockCard() {
+        let alert = UIAlertController(title: "Lock Card", message: "Do you want to lock the card?", preferredStyle: .alert)
+        
+        let no = UIAlertAction(title: "No", style: .default, handler:
+        {
+            (alert: UIAlertAction!) in self.NoHandler()
+        })
+        
+        let yes = UIAlertAction(title: "Yes", style: .default, handler:
+        {
+            (alert: UIAlertAction!) in self.YesHandler()
+        })
+        
+        
+        alert.addAction(no)
+        alert.addAction(yes)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func NoHandler() {
+        
+    }
+    func YesHandler() {
+        print("card locked")
+        cardOn = false
+        performSegue(withIdentifier: "unwindSegue", sender: self)
+    }
+    
     @IBAction func checkButtonClicked(_ sender: UIButton) {
         print("unwind")
         let alert = UIAlertController(title: "Transaction Approved", message: "You have approved this transaction", preferredStyle: .alert)
@@ -140,6 +169,17 @@ class ChargeInquiry: UIViewController {
      performSegue(withIdentifier: "unwindSegue", sender: self)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // parepare for next scene
+        if segue.identifier == "unwindSegue" {
+            
+            if let dvc = segue.destination as? ViewController {
+                // use variables from purchase1 if created, instead of hard coded value
+                dvc.cardOn = self.cardOn
+            }
+        }
+    }
+
     /*
     // MARK: - Navigation
 
