@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import NessieFmwk
 
 class ChargeInquiry: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
@@ -16,23 +17,27 @@ class ChargeInquiry: UIViewController {
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     
+    
+    
+    var userLat = 37.543499
+    var userLong = -77.436787
+    var purchaseLat = 37.443499
+    var purchaseLong = -77.436787
+    var location: (Double,Double)? = nil
+    var city = ""
+    var date:Date? = nil
+    var type = ""
+    var amount = 0.0
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let userLat = 37.543499
-        
-        let userLong = -77.436787
-        
-        
-        
-        let purchaseLat = 37.443499
-        
-        let purchaseLong = -77.436787
         
         
         
         super.viewDidLoad()
-        
+        displayData()
         let initialLocation = CLLocation(latitude: (userLat + purchaseLat) / 2.0, longitude: (userLong + purchaseLong) / 2.0)
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -84,6 +89,16 @@ class ChargeInquiry: UIViewController {
         self.mapView.showAnnotations(self.mapView.annotations, animated: true)
     }
     
+    func displayData() {
+        cityLabel.text = city
+        amountLabel.text = String(amount)
+        typeLabel.text = type
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US")
+        dateFormatter.setLocalizedDateFormatFromTemplate("dd.MM.yyyy HH:mm")
+        dateLabel.text = dateFormatter.string(from: date!)
+    }
+    
     let regionRadius: CLLocationDistance = 1000
     
     func centerMapOnLocation(location: CLLocation) {
@@ -107,9 +122,22 @@ class ChargeInquiry: UIViewController {
 
     @IBAction func checkButtonClicked(_ sender: UIButton) {
         print("unwind")
-                 performSegue(withIdentifier: "unwindSegue", sender: self)
+        let alert = UIAlertController(title: "Transaction Approved", message: "You have approved this transaction", preferredStyle: .alert)
+        
+        let ok = UIAlertAction(title: "Ok", style: .default, handler:
+        {
+            (alert: UIAlertAction!) in self.OkHandler()
+        })
+        
+        
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
+        
     }
     
+    func OkHandler() {
+     performSegue(withIdentifier: "unwindSegue", sender: self)
+    }
     
     /*
     // MARK: - Navigation

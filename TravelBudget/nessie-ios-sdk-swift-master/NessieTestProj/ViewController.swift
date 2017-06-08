@@ -72,6 +72,7 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                                                            zipCode: "23219"),
 
                                           geocode: Geocode(lng: -77.437291, lat: 37.542430))
+
         
         var latitudeNear = merchantNear.geocode.lat
         var longitudeNear = merchantNear.geocode.lng
@@ -113,6 +114,8 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         
         print("START HERE")
         print(verified(location: (latitudeFar,longitudeFar)))
+        
+        // create a purchase here
     }
     
     func verified (location: (NSNumber, NSNumber)) -> Bool {
@@ -149,6 +152,29 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
     @IBAction func suspiciousButtonClicked(_ sender: UIButton) {
         //let _ = PurchasesTests()
         testDataFar()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // parepare for next scene
+        if segue.identifier == "distant" {
+            
+            if let dvc = segue.destination as? ChargeInquiry {
+                // use variables from purchase1 if created, instead of hard coded value
+                dvc.amount = 143.4
+                dvc.city = "NY"
+                dvc.date = Date.init()
+                dvc.type = "Grocery"
+            }
+        }
+        else if segue.identifier == "nearby" {
+            if let dvc = segue.destination as? NormalTransactions {
+                // use variables from purchase1 if created, instead of hard coded value
+                dvc.amount = 175.5
+                dvc.city = "Richmond"
+                dvc.date = Date.init()
+                dvc.type = "Food"
+            }
+        }
     }
     
 }
