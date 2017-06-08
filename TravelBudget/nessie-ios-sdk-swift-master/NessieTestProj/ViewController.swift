@@ -24,31 +24,31 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
         manager.desiredAccuracy = kCLLocationAccuracyBest
         
         manager.requestWhenInUseAuthorization()
-        
         manager.startUpdatingLocation()
         testData()
+        
+        
     }
-            
-            func locationManager(_ manager: CLLocationManager, didUpdateLocations locations:[CLLocation]) {
-                
-                
-                
-                let location = locations[0]
-                
-                let span:MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
-                
-                let myLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
-                
-                let region:MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
-                
-                print("Latitude: \(myLocation.latitude)")
-                
-                print("Longitude: \(myLocation.longitude)")
-                
-            }
-
     
+    @IBAction func unwindToVC1(segue:UIStoryboardSegue) { }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations:[CLLocation]) {
+        
+        let location = locations[0]
+        let span:MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
+        let myLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+        let region:MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
+                
+        print("Latitude: \(myLocation.latitude)")
+        print("Longitude: \(myLocation.longitude)")
+        
+        
+                
+    }
+
+    //Called on view open
     func testData() {
+        //Personal contact information
         var address1 = Address.init(streetName: "Capital One Dr", streetNumber: "15054", city: "Richmond", state: "VA", zipCode: "23229")
         customer1 = Customer.init(firstName: "Kyle", lastName: "Guan", address: address1, customerId: "1")
         
@@ -60,61 +60,45 @@ class ViewController: UIViewController,CLLocationManagerDelegate {
                                        balance: 100,
                                        accountNumber: "1234567890123456",
                                        customerId: "57d0c20d1fd43e204dd48282")
-        let merchant: Merchant = Merchant(merchantId: "57cf75cea73e494d8675ec49",
-                                          name: "Best Productions",
-                                          category: ["Production"],
-                                          address: Address(streetName: "Lafayette St.",
-                                                           streetNumber: "5901",
-                                                           city: "Brooklyn",
-                                                           state: "NY",
-                                                           zipCode: "07009"),
-                                          geocode: Geocode(lng: -1, lat: 33))
-        var latitude = merchant.geocode.lat
-        var longitude = merchant.geocode.lng
-        print("lat : \(latitude)")
-        print("longitude: \(longitude)")
+        let merchantNear: Merchant = Merchant(merchantId: "1000",
+                                          name: "La Grotta Ristorante",
+                                          category: ["Restaurant"],
+                                          address: Address(streetName: "East Broad Street",
+                                                           streetNumber: "529",
+                                                           city: "Richmond",
+                                                           state: "VA",
+                                                           zipCode: "23219"),
+
+                                          geocode: Geocode(lng: -77.437291, lat: 37.542430))
         
+        let merchantFar: Merchant = Merchant(merchantId: "57cf75cea73e494d8675ec49",
+                                          name: "Ko",
+                                          category: ["Contemporary American"],
+                                          address: Address(streetName: "Extra Place",
+                                                           streetNumber: "8",
+                                                           city: "New York",
+                                                           state: "NY",
+                                                           zipCode: "10003"),
+                                          geocode: Geocode(lng: -73.991654, lat: 40.724860))
+        
+        var latitudeNear = merchantNear.geocode.lat
+        var longitudeNear = merchantNear.geocode.lng
+        print("lat Near : \(latitudeNear)")
+        print("longitude Near: \(longitudeNear)")
+        
+        var latitudeFar = merchantFar.geocode.lat
+        var longitudeFar = merchantFar.geocode.lng
+        print("lat Far: \(latitudeFar)")
+        print("longitude Far: \(longitudeFar)")
     }
     
-    @IBAction func testAccountsRequests(sender: AnyObject) {
-        print("Hi")
-        let _ = AccountTests()
-    }
-    
-    @IBAction func testAtmRequests(sender: AnyObject) {
-        let _ = ATMTests()
-    }
-    
-    @IBAction func testBillRequests(sender: AnyObject) {
-        let _ = BillTests()
-    }
-    
-    @IBAction func testBranchesRequests(sender: AnyObject) {
-        let _ = BranchTests()
-    }
-    
-    @IBAction func testCustomersRequests(sender: AnyObject) {
-        let _ = CustomerTests()
+    @IBAction func nearbyTransClicked(_ sender: UIButton) {
+       
     }
 
-    @IBAction func testDepositsRequests(sender: AnyObject) {
-        let _ = DepositsTests()
-    }
     
-    @IBAction func testPurchasesRequests(sender: AnyObject) {
+    @IBAction func suspiciousButtonClicked(_ sender: UIButton) {
         let _ = PurchasesTests()
-    }
-    
-    @IBAction func testMerchantsRequests(sender: UIButton) {
-        let _ = MerchantTests()
-    }
-    
-    @IBAction func testTransfersRequests(sender: AnyObject) {
-        let _ = TransfersTests()
-    }
-    
-    @IBAction func testWithdrawalsRequests(sender: UIButton) {
-        let _ = WithdrawalsTests()
     }
     
 }
